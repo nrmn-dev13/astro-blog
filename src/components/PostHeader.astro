@@ -1,0 +1,35 @@
+---
+import { slugify, formatDate } from "../js/utils";
+import { Img } from "astro-imagetools/components";
+const { title, date, category, author, image } = Astro.props;
+---
+
+<header>
+  <div class="container">
+    <small>
+      <a href={`/category/${slugify(category)}`} class="badge">{category}</a>
+    </small>
+    <h1 class="h2">{title}</h1>
+    <p>
+      by <a href={`/author/${slugify(author)}`}>{author}</a> - {
+        formatDate(date)
+      }
+    </p>
+  </div>
+  <Img
+    src={image.src}
+    alt={image.alt}
+    width={1200}
+    height={600}
+    format="avif"
+    objectFit="cover"
+    quality={80}
+    aspect={1.3333333333333333}
+    attributes={{
+      img: {
+        class: 'hero-image'
+      }
+    }}
+  />
+  <!-- <img src={image.src} alt={image.alt} /> -->
+</header>
